@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- No plain-HTTP traffic anywhere… -->
+    <base-config cleartextTrafficPermitted="false" />
+    <!-- …except the USB tunnel to the laptop (adb reverse tcp:8765). -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>

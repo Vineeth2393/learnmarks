@@ -1,0 +1,16 @@
+# local data (database, backups)
+/data/
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# web
+node_modules/
+web/dist/
+# os/editor
+.DS_Store
+.idea/
+.vscode/
+/data-dev/
+/data-try/

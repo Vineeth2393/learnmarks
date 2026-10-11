@@ -1,0 +1,33 @@
+{
+  "_comment": "Canonical-URL test vectors. Used by backend (pytest) and Android (JUnit). Keep both implementations passing.",
+  "valid": [
+    {"in": "https://x.com/_avichawla/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "_avichawla"},
+    {"in": "https://twitter.com/_avichawla/status/2093962020962083139?s=20&t=abc", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "_avichawla"},
+    {"in": "https://mobile.twitter.com/_avichawla/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "_avichawla"},
+    {"in": "https://www.x.com/_avichawla/status/2093962020962083139/photo/1", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "_avichawla"},
+    {"in": "https://x.com/i/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": null},
+    {"in": "https://x.com/i/web/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": null},
+    {"in": "https://fxtwitter.com/someone/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "someone"},
+    {"in": "x.com/someone/status/2093962020962083139", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "someone"},
+    {"in": "  https://X.COM/Someone/status/2093962020962083139  ", "canonical": "x:status:2093962020962083139", "platform": "x", "handle": "Someone"},
+    {"in": "https://x.com/someone", "canonical": "url:x.com/someone", "platform": "x", "handle": null},
+    {"in": "https://www.linkedin.com/feed/update/urn:li:activity:7245123456789012345/", "canonical": "linkedin:activity:7245123456789012345", "platform": "linkedin", "handle": null},
+    {"in": "https://www.linkedin.com/feed/update/urn%3Ali%3Aactivity%3A7245123456789012345", "canonical": "linkedin:activity:7245123456789012345", "platform": "linkedin", "handle": null},
+    {"in": "https://www.linkedin.com/posts/jane-doe_rag-llm-activity-7245123456789012345-AbCd?utm_source=share&utm_medium=member_android", "canonical": "linkedin:activity:7245123456789012345", "platform": "linkedin", "handle": null},
+    {"in": "https://www.linkedin.com/feed/update/urn:li:share:7245123456789012345", "canonical": "linkedin:share:7245123456789012345", "platform": "linkedin", "handle": null},
+    {"in": "https://www.linkedin.com/pulse/some-article-jane-doe/", "canonical": "url:linkedin.com/pulse/some-article-jane-doe", "platform": "linkedin", "handle": null},
+    {"in": "https://example.com/blog/post/?utm_source=x&b=2&a=1#section", "canonical": "url:example.com/blog/post?a=1&b=2", "platform": "other", "handle": null},
+    {"in": "http://www.Example.com/", "canonical": "url:example.com/", "platform": "other", "handle": null},
+    {"in": "https://github.com/user/repo?ref=producthunt", "canonical": "url:github.com/user/repo", "platform": "other", "handle": null}
+  ],
+  "invalid": [
+    "",
+    "   ",
+    "javascript:alert(1)",
+    "data:text/html,hello",
+    "file:///etc/passwd",
+    "ftp://example.com/file",
+    "https://",
+    "not a url"
+  ]
+}

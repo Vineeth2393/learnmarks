@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+/* Design tokens — docs/DESIGN.md §6. Light values here; dark values below. */
+@theme {
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-canvas: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-ink: #272727;
+  --color-sub: #3f3f46;
+  --color-soft: #4b4b52;
+  --color-muted: #5f5f66;
+  --color-line: #e4e4e7;
+  --color-line-strong: #d4d4d8;
+  --color-hover: #ededef;
+  --color-active: #e7e7ea;
+
+  /* "Inverse" panels: the dark Continue card, primary buttons, toasts. */
+  --color-inverse: #272727;
+  --color-inverse-hover: #111111;
+  --color-on-inverse: #ffffff;
+  --color-inverse-muted: #c9c9cf;
+  --color-inverse-line: #55555b;
+  --color-inverse-track: #4a4a50;
+
+  /* Text on pastel topic colours stays dark in both themes. */
+  --color-on-pastel: #272727;
+
+  --color-todo-bg: #f3e2a0;
+  --color-todo-line: #e3cd78;
+  --color-todo-ink: #4a3b00;
+  --color-done-bg: #dcefe2;
+  --color-done-line: #b9dcc5;
+  --color-done-ink: #1f5c36;
+  --color-warn-bg: #fce3d6;
+  --color-warn-line: #f0c0a6;
+  --color-warn-ink: #8a2e0c;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+}
+
+/* Dark theme: follows the system unless the user picked Light, or forced with Dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-canvas: #131315;
+    --color-surface: #1c1c1f;
+    --color-ink: #ececee;
+    --color-sub: #d4d4d8;
+    --color-soft: #c4c4cc;
+    --color-muted: #a1a1aa;
+    --color-line: #2e2e33;
+    --color-line-strong: #3f3f46;
+    --color-hover: #26262a;
+    --color-active: #2c2c31;
+    --color-inverse: #ececee;
+    --color-inverse-hover: #ffffff;
+    --color-on-inverse: #18181b;
+    --color-inverse-muted: #52525b;
+    --color-inverse-line: #a1a1aa;
+    --color-inverse-track: #c4c4cc;
+    --color-todo-bg: #4a3f12;
+    --color-todo-line: #6b5a1a;
+    --color-todo-ink: #f3e2a0;
+    --color-done-bg: #173b25;
+    --color-done-line: #2b5c3d;
+    --color-done-ink: #9fd9b3;
+    --color-warn-bg: #4a2416;
+    --color-warn-line: #7a3a22;
+    --color-warn-ink: #f5b89a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #131315;
+  --color-surface: #1c1c1f;
+  --color-ink: #ececee;
+  --color-sub: #d4d4d8;
+  --color-soft: #c4c4cc;
+  --color-muted: #a1a1aa;
+  --color-line: #2e2e33;
+  --color-line-strong: #3f3f46;
+  --color-hover: #26262a;
+  --color-active: #2c2c31;
+  --color-inverse: #ececee;
+  --color-inverse-hover: #ffffff;
+  --color-on-inverse: #18181b;
+  --color-inverse-muted: #52525b;
+  --color-inverse-line: #a1a1aa;
+  --color-inverse-track: #c4c4cc;
+  --color-todo-bg: #4a3f12;
+  --color-todo-line: #6b5a1a;
+  --color-todo-ink: #f3e2a0;
+  --color-done-bg: #173b25;
+  --color-done-line: #2b5c3d;
+  --color-done-ink: #9fd9b3;
+  --color-warn-bg: #4a2416;
+  --color-warn-line: #7a3a22;
+  --color-warn-ink: #f5b89a;
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-sub);
+    background: var(--color-surface);
+    white-space: nowrap;
+  }
+  .pill-to_learn {
+    background: var(--color-todo-bg);
+    border-color: var(--color-todo-line);
+    color: var(--color-todo-ink);
+  }
+  .pill-in_progress {
+    background: var(--color-inverse);
+    border-color: var(--color-inverse);
+    color: var(--color-on-inverse);
+  }
+  .pill-learned {
+    background: var(--color-done-bg);
+    border-color: var(--color-done-line);
+    color: var(--color-done-ink);
+  }
+  .pill-warn {
+    background: var(--color-warn-bg);
+    border-color: var(--color-warn-line);
+    color: var(--color-warn-ink);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover {
+    border-color: var(--color-muted);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-dark {
+    background: var(--color-inverse);
+    border-color: var(--color-inverse);
+    color: var(--color-on-inverse);
+    font-weight: 600;
+  }
+  .btn-dark:hover {
+    background: var(--color-inverse-hover);
+    border-color: var(--color-inverse-hover);
+  }
+  .btn-danger {
+    border-color: var(--color-warn-line);
+    color: var(--color-warn-ink);
+  }
+  .inp {
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-size: 15px;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+  }
+  .inp:focus {
+    border-color: var(--color-ink);
+  }
+  .chip {
+    font-size: 13px;
+    padding: 6px 13px;
+    min-height: 34px;
+    border-radius: 999px;
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-surface);
+    color: var(--color-sub);
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--color-inverse);
+    border-color: var(--color-inverse);
+    color: var(--color-on-inverse);
+  }
+  .seg {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  .seg > button {
+    flex: 1 1 auto;
+    font-size: 14px;
+    padding: 9px 14px;
+    min-height: 42px;
+    border: 0;
+    border-right: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-sub);
+  }
+  .seg > button:last-child {
+    border-right: 0;
+  }
+  .seg > button[aria-pressed="true"] {
+    background: var(--color-inverse);
+    color: var(--color-on-inverse);
+    font-weight: 600;
+  }
+  .topic-bg {
+    background-color: var(--topic);
+    color: var(--color-on-pastel);
+  }
+  :root[data-theme="dark"] .topic-bg {
+    background-color: color-mix(in srgb, var(--topic) 80%, #131315);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .topic-bg {
+      background-color: color-mix(in srgb, var(--topic) 80%, #131315);
+    }
+  }
+  .card-lift {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-3px);
+  }
+  .pat-dots {
+    background-image: radial-gradient(rgba(39, 39, 39, 0.2) 1.2px, transparent 1.5px);
+    background-size: 10px 10px;
+  }
+  .pat-lines {
+    background-image: repeating-linear-gradient(135deg, rgba(39, 39, 39, 0.16) 0 1px, transparent 1px 9px);
+  }
+  .pat-grid {
+    background-image: linear-gradient(rgba(39, 39, 39, 0.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(39, 39, 39, 0.13) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  .pat-waves {
+    background-image: repeating-radial-gradient(circle at 0 100%, rgba(39, 39, 39, 0.16) 0 1px, transparent 1px 11px);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
